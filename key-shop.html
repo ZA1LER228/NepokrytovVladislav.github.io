@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="shortcut icon" href="icon.png">
+    <meta name="keywords" content="Key shop, ключи стим, keys steam">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Shop — магазин лицензионных ключей Steam</title>
+
+    <style>
+        :root {
+            --bg-color: rgba(0, 0, 0, 0.75);
+            --text-color: white;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(15, 15, 25, 0.8);
+            --nav-border: rgba(255, 255, 255, 0.15);
+            --nav-shadow: rgba(0, 0, 0, 0.3);
+            --card-shadow: rgb(107, 107, 107);
+            --support-btn-gradient: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+            --support-btn-shadow: rgba(110, 69, 226, 0.3);
+            --price-color: #4cd137;
+        }
+
+        .light-theme {
+            --bg-color: rgba(255, 255, 255, 0.85);
+            --text-color: #333;
+            --card-bg: rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(240, 240, 250, 0.9);
+            --nav-border: rgba(0, 0, 0, 0.15);
+            --nav-shadow: rgba(0, 0, 0, 0.1);
+            --card-shadow: rgb(150, 150, 150);
+            --support-btn-gradient: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
+            --support-btn-shadow: rgba(74, 108, 247, 0.3);
+            --price-color: #27ae60;
+        }
+
+        body {
+            margin: 0;
+            background-image: url(https://d145fhkdapgfg3.cloudfront.net/files/picture/17511/m_0_1598986181_926587396fa64ab0dd62e8d1d2774c8d_fes.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-color);   
+            font-family: Arial, sans-serif;
+            transition: all 0.5s ease;
+        }
+
+        body.light-theme {
+            background-image: url(https://cs8.pikabu.ru/post_img/big/2016/03/11/6/145768956921092677.jpg);
+            margin: 0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            transition: all 0.5s ease;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-color);
+            z-index: 500;
+            transition: all 0.5s ease;
+        }
+
+        /* Новая навигационная панель */
+        .header-nav {
+            position: relative;
+            z-index: 1000;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--nav-border);
+            box-shadow: 0 5px 25px var(--nav-shadow);
+            animation: fadeIn 1s ease forwards;
+            transition: all 0.5s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 45px;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .support-btn {
+            display: flex;
+            align-items: center;
+            padding: 8px 18px;
+            background: var(--support-btn-gradient);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 15px;
+            border: none;
+            box-shadow: 0 4px 15px var(--support-btn-shadow);
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--support-btn-shadow);
+        }
+        
+        .support-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            background-image: url('support.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        /* Кнопка переключения темы */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            margin-left: 15px;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle img {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Слайдер популярных игр */
+        .games-slider {
+            animation: fadeIn 1s ease forwards;
+            transition: all 0.5s ease;
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px 0;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .slider-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 15px;
+            padding: 0 40px;
+        }
+        
+        .slider-card {
+            min-width: 150px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .slider-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .slider-card-title {
+            font-size: 14px;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+        
+        .slider-card-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--price-color);
+        }
+        
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--support-btn-gradient);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .slider-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev-btn {
+            left: 0;
+        }
+        
+        .next-btn {
+            right: 0;
+        }
+
+        /* Остальные стили */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            z-index: 1000;
+            position: relative;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 5px 5px 55px rgba(255, 255, 255, 0.2);
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 5px 5px 30px var(--card-shadow);
+            transition: transform 0.3s;
+            animation: fadeIn 1s ease forwards;
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+
+        .card img {
+            max-height: 200px;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            padding: 10px;
+            height: 40px;
+            font-size: 18px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .card-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--price-color);
+            margin-bottom: 15px;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Стили для корзины */
+        .cart-btn {
+            display: flex;
+            align-items: center;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 15px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+            margin-left: 15px;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
+        }
+
+        .cart-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .cart-count {
+            background-color: #ff4757;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .add-to-cart {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover .add-to-cart {
+            opacity: 1;
+        }
+
+        /* Модальное окно корзины */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--nav-border);
+        }
+
+        .cart-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--nav-border);
+        }
+
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--price-color);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff4757;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-color);
+        }
+
+        /* Окно уведомления */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4cd137 0%, #44bd32 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3000;
+            display: none;
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>      
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <!-- Окно уведомления -->
+    <div class="notification" id="notification">
+        Ожидайте ваш товар! Он скоро будет доставлен.
+    </div>
+    
+    <!-- Новая навигационная панель -->
+    <div class="header-nav">
+        <div class="nav-container">
+            <a href="key-shop.html" class="logo-link">
+                <img src="KEYShop.png" alt="Key Shop" class="logo">
+            </a>
+            
+            <div class="nav-right">
+                <a href="support.html" class="support-btn">
+                    <span class="support-icon"></span>
+                    Поддержка
+                </a>
+                <button class="cart-btn" id="cartBtn">
+                    <span class="cart-icon"></span>
+                    Корзина
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" title="Переключить тему">
+                    <img src="https://www.svgrepo.com/show/309493/dark-theme.svg" alt="Переключить тему">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно корзины -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <div class="cart-title">Ваша корзина</div>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">Корзина пуста</div>
+        </div>
+        <div class="cart-total">
+            <span>Итого:</span>
+            <span id="cartTotal">0 ₽</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+    </div>
+
+    <!-- Слайдер популярных игр -->
+    <div class="games-slider">
+        <h2 class="slider-title">Популярные игры</h2>
+        <button class="slider-btn prev-btn" id="prevBtn">❮</button>
+        <button class="slider-btn next-btn" id="nextBtn">❯</button>
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-card">
+                <a href="cs2.html">
+                    <img src="https://images.steamusercontent.com/ugc/2093668098026774633/3FD94CBFDCFD35C9E7B37239CD10A221BE659C75/?imw=512&imh=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" alt="Counter-Strike 2">
+                    <div class="slider-card-title">CS2</div>
+                    <div class="slider-card-price">999 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="dayz.html">
+                    <img src="https://dayz.com/img/dayz_thumb.jpg" alt="DayZ">
+                    <div class="slider-card-title">DayZ</div>
+                    <div class="slider-card-price">2 499 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="rust.html">
+                    <img src="https://www.playrust.nl/wp-content/uploads/2017/02/Rust-Logo.jpg" alt="RUST">
+                    <div class="slider-card-title">RUST</div>
+                    <div class="slider-card-price">1 399 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="miside.html">
+                    <img src="https://i.pinimg.com/736x/22/34/05/223405ea0646c385576a47a880f06898.jpg" alt="MiSide">
+                    <div class="slider-card-title">MiSide</div>
+                    <div class="slider-card-price">599 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="raft.html">
+                    <img src="https://topsteamkeys.net/wp-content/uploads/2023/05/raft-1.jpg" alt="RAFT">
+                    <div class="slider-card-title">RAFT</div>
+                    <div class="slider-card-price">349 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="terraria.html">
+                    <img src="https://gas-kvas.com/grafic/uploads/posts/2024-01/gas-kvas-com-p-nadpis-terrariya-na-prozrachnom-fone-33.png" alt="Terraria">
+                    <div class="slider-card-title">Terraria</div>
+                    <div class="slider-card-price">399 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="bodycam.html">
+                    <img src="https://cdn2.steamgriddb.com/grid/66613d07f26ee86c04e0cc3f47141edc.png" alt="Bodycam">
+                    <div class="slider-card-title">BODYCAM</div>
+                    <div class="slider-card-price">999 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="cuphead.html">
+                    <img src="https://cdn2.steamgriddb.com/icon/894a200a66c2b57205af564d6883882a/32/512x512.png" alt="Cuphead">
+                    <div class="slider-card-title">Cuphead</div>
+                    <div class="slider-card-price">379 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="hotline.html">
+                    <img src="https://images.steamusercontent.com/ugc/135500881489663872/DC85C68C91D6FC5BC176E01919CBE262B65F6723/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Hotline Miami">
+                    <div class="slider-card-title">Hotline Miami</div>
+                    <div class="slider-card-price">399 ₽</div>
+                </a>
+            </div>
+            <div class="slider-card">
+                <a href="hotline2.html">
+                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202307/1322/1ce9388532d52e419851d9fd7d66d4884ffeb6b4de2f54af.png" alt="Hotline Miami 2">
+                    <div class="slider-card-title">Hotline Miami 2</div>
+                    <div class="slider-card-price">579 ₽</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <a href="cs2.html">
+                <img src="https://images.steamusercontent.com/ugc/2093668098026774633/3FD94CBFDCFD35C9E7B37239CD10A221BE659C75/?imw=512&imh=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" alt="Counter — Strike 2">
+                <div class="card-title">Counter-Strike 2</div>
+                <div class="card-price">999 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Counter-Strike 2" data-price="999" data-img="https://images.steamusercontent.com/ugc/2093668098026774633/3FD94CBFDCFD35C9E7B37239CD10A221BE659C75/?imw=512&imh=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true">+</button>
+        </div>
+        <div class="card">
+            <a href="dayz.html">
+                <img src="https://dayz.com/img/dayz_thumb.jpg" alt="DayZ">
+                <div class="card-title">DayZ</div>
+                <div class="card-price">2 499 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="DayZ" data-price="1299" data-img="https://dayz.com/img/dayz_thumb.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="rust.html">
+                <img src="https://www.playrust.nl/wp-content/uploads/2017/02/Rust-Logo.jpg" alt="RUST">
+                <div class="card-title">RUST</div>
+                <div class="card-price">1 399 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="RUST" data-price="1499" data-img="https://www.playrust.nl/wp-content/uploads/2017/02/Rust-Logo.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="miside.html">
+                <img src="https://i.pinimg.com/736x/22/34/05/223405ea0646c385576a47a880f06898.jpg" alt="MiSide">
+                <div class="card-title">MiSide</div>
+                <div class="card-price">599 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="MiSide" data-price="799" data-img="https://i.pinimg.com/736x/22/34/05/223405ea0646c385576a47a880f06898.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="raft.html">
+                <img src="https://topsteamkeys.net/wp-content/uploads/2023/05/raft-1.jpg" alt="RAFT">
+                <div class="card-title">RAFT</div>
+                <div class="card-price">349 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="RAFT" data-price="899" data-img="https://topsteamkeys.net/wp-content/uploads/2023/05/raft-1.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="terraria.html">
+                <img src="https://gas-kvas.com/grafic/uploads/posts/2024-01/gas-kvas-com-p-nadpis-terrariya-na-prozrachnom-fone-33.png" alt="Terraria">
+                <div class="card-title">Terraria</div>
+                <div class="card-price">399 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Terraria" data-price="499" data-img="https://forums.terraria.org/index.php?attachments/icon-png.280655/">+</button>
+        </div>
+        <div class="card">
+            <a href="bodycam.html">
+                <img src="https://cdn2.steamgriddb.com/grid/66613d07f26ee86c04e0cc3f47141edc.png" alt="Bodycam">
+                <div class="card-title">BODYCAM</div>
+                <div class="card-price">999 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="BODYCAM" data-price="1599" data-img="https://cdn2.steamgriddb.com/grid/66613d07f26ee86c04e0cc3f47141edc.png">+</button>
+        </div>
+        <div class="card">
+            <a href="cuphead.html">
+                <img src="https://cdn2.steamgriddb.com/icon/894a200a66c2b57205af564d6883882a/32/512x512.png" alt="Cuphead">
+                <div class="card-title">Cuphead</div>
+                <div class="card-price">379 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Cuphead" data-price="699" data-img="https://cdn2.steamgriddb.com/icon/894a200a66c2b57205af564d6883882a/32/512x512.png">+</button>
+        </div>
+        <div class="card">
+            <a href="hotline.html">
+                <img src="https://images.steamusercontent.com/ugc/135500881489663872/DC85C68C91D6FC5BC176E01919CBE262B65F6723/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Hotline Miami">
+                <div class="card-title">Hotline Miami</div>
+                <div class="card-price">399 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Hotline Miami" data-price="399" data-img="https://images.steamusercontent.com/ugc/135500881489663872/DC85C68C91D6FC5BC176E01919CBE262B65F6723/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">+</button>
+        </div>
+        <div class="card">
+            <a href="hotline2.html">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202307/1322/1ce9388532d52e419851d9fd7d66d4884ffeb6b4de2f54af.png" alt="Hotline Miami 2">
+                <div class="card-title">Hotline Miami 2</div>
+                <div class="card-price">579 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Hotline Miami 2" data-price="599" data-img="https://image.api.playstation.com/vulcan/ap/rnd/202307/1322/1ce9388532d52e419851d9fd7d66d4884ffeb6b4de2f54af.png">+</button>
+        </div>
+        <div class="card">
+            <a href="maximum.html">
+                <img src="https://archive.org/download/Maximum-Action-Original-Soundtrack/Maximum%20Action%20Original%20Soundtrack/cover.jpg" alt="Maximum">
+                <div class="card-title">Maximum Action</div>
+                <div class="card-price">699 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Maximum Action" data-price="499" data-img="https://archive.org/download/Maximum-Action-Original-Soundtrack/Maximum%20Action%20Original%20Soundtrack/cover.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="sniper.html">
+                <img src="https://sniperelite.com/_content/f_webp/SER_KeyArt_Logo_ASQ.png" alt="Sniper">
+                <div class="card-title">Sniper Elite:Resistance</div>
+                <div class="card-price">1 599 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Sniper Elite:Resistance" data-price="1299" data-img="https://sniperelite.com/_content/f_webp/SER_KeyArt_Logo_ASQ.png">+</button>
+        </div>
+        <div class="card">
+            <a href="Avowed.html">
+                <img src="https://assets.xboxservices.com/assets/fa/12/fa1203f4-a126-41ff-ba6e-6b3e88ca0f19.jpg?n=49299933_GLP-Page-Hero-0_1083x1222_02.jpg" alt="Avowed">
+                <div class="card-title">Avowed</div>
+                <div class="card-price">4 799 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Avowed" data-price="1999" data-img="https://assets.xboxservices.com/assets/fa/12/fa1203f4-a126-41ff-ba6e-6b3e88ca0f19.jpg?n=49299933_GLP-Page-Hero-0_1083x1222_02.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="stalker.html">
+                <img src="https://www.adrenaline.com.br/wp-content/uploads/2023/07/s-t-a-l-k-e-r-2-heart-of-chornobyl-capa-310x310.jpg" alt="Stalker">
+                <div class="card-title">Stalker 2: Heart of Chernobyl</div>
+                <div class="card-price">3 399 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Stalker 2: Heart of Chernobyl" data-price="2499" data-img="https://www.adrenaline.com.br/wp-content/uploads/2023/07/s-t-a-l-k-e-r-2-heart-of-chornobyl-capa-310x310.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="days.html">
+                <img src="https://www.bluefangsolutions.com/wp-content/uploads/2013/12/7dtd_image-500x507.png" alt="Days">
+                <div class="card-title">7 Days to Die</div>
+                <div class="card-price">1 499 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="7 Days to Die" data-price="899" data-img="https://www.bluefangsolutions.com/wp-content/uploads/2013/12/7dtd_image-500x507.png">+</button>
+        </div>
+        <div class="card">
+            <a href="zomboid.html">
+                <img src="https://assetsio.gnwcdn.com/zomboidshare.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp" alt="Zomboid">
+                <div class="card-title">Project Zomboid</div>
+                <div class="card-price">499 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Project Zomboid" data-price="799" data-img="https://assetsio.gnwcdn.com/zomboidshare.jpg?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp">+</button>
+        </div>
+        <div class="card">
+            <a href="forest.html">
+                <img src="https://fontmeme.com/images/the-forest-font.png" alt="Forest">
+                <div class="card-title">The Forest</div>
+                <div class="card-price">349 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="The Forest" data-price="699" data-img="https://fontmeme.com/images/the-forest-font.png">+</button>
+        </div>
+        <div class="card">
+            <a href="ready.html">
+                <img src="https://bleedingcool.com/wp-content/uploads/2021/03/Ready-or-Not-Main-Art-scaled-900x900.jpg" alt="Ready or Not">
+                <div class="card-title">Ready or Not</div>
+                <div class="card-price">999 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Ready or Not" data-price="1299" data-img="https://bleedingcool.com/wp-content/uploads/2021/03/Ready-or-Not-Main-Art-scaled-900x900.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="phasma.html">
+                <img src="https://images.steamusercontent.com/ugc/1848179050040022588/6029B87EDA147D5A879ABCB040C97AC7FE5F8425/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Phasmophobia">
+                <div class="card-title">Phasmophobia</div>
+                <div class="card-price">499 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Phasmophobia" data-price="399" data-img="https://images.steamusercontent.com/ugc/1848179050040022588/6029B87EDA147D5A879ABCB040C97AC7FE5F8425/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">+</button>
+        </div>
+        <div class="card">
+            <a href="liar.html">
+                <img src="https://play-lh.googleusercontent.com/kOZkdKUeZBGh_sHrG28ncuWULhe8vSIRIQT6id01p6RDIu6me_bG5TSfMCKCtzQAgnM=w256" alt="Liar's Bar">
+                <div class="card-title">Liar's Bar</div>
+                <div class="card-price">279 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Liar's Bar" data-price="299" data-img="https://play-lh.googleusercontent.com/kOZkdKUeZBGh_sHrG28ncuWULhe8vSIRIQT6id01p6RDIu6me_bG5TSfMCKCtzQAgnM=w256">+</button>
+        </div>
+        <div class="card">
+            <a href="gmod.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Garry%27s_Mod_logo.svg/2048px-Garry%27s_Mod_logo.svg.png" alt="Garry's Mod">
+                <div class="card-title">Garry's Mod</div>
+                <div class="card-price">299 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Garry's Mod" data-price="399" data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Garry%27s_Mod_logo.svg/2048px-Garry%27s_Mod_logo.svg.png">+</button>
+        </div>
+        <div class="card">
+            <a href="altushka.html">
+                <img src="https://i1.sndcdn.com/artworks-OwtbfzYkFL9Y7ubm-76v3aw-t1080x1080.jpg" alt="Altushka">
+                <div class="card-title">Altushka</div>
+                <div class="card-price">179 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Altushka" data-price="199" data-img="https://i1.sndcdn.com/artworks-OwtbfzYkFL9Y7ubm-76v3aw-t1080x1080.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="metro.html">
+                <img src="https://i1.sndcdn.com/artworks-000545362569-qbuo1r-t500x500.jpg" alt="Metro Exodus">
+                <div class="card-title">Metro Exodus</div>
+                <div class="card-price">1 499 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Metro Exodus" data-price="999" data-img="https://i1.sndcdn.com/artworks-000545362569-qbuo1r-t500x500.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="stray.html">
+                <img src="https://seeklogo.com/images/S/stray-logo-FE9067EB75-seeklogo.com.png" alt="Stray">
+                <div class="card-title">Stray</div>
+                <div class="card-price">599 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Stray" data-price="1199" data-img="https://seeklogo.com/images/S/stray-logo-FE9067EB75-seeklogo.com.png">+</button>
+        </div>
+        <div class="card">
+            <a href="hogwarts.html">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202503/2716/ce2e7f5896365b4e35a192b1f7592b590fee98827644ddb4.png" alt="Hogwarts Legacy">
+                <div class="card-title">Hogwarts Legacy</div>
+                <div class="card-price">3 199 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Hogwarts Legacy" data-price="2999" data-img="https://image.api.playstation.com/vulcan/ap/rnd/202503/2716/ce2e7f5896365b4e35a192b1f7592b590fee98827644ddb4.png">+</button>
+        </div>
+        <div class="card">
+            <a href="witcher.html">
+                <img src="https://gamespirit.org/image/%D0%B2%D0%B5%D0%B4%D1%8C%D0%BC%D0%B0%D0%BA-3--%D0%B4%D0%B8%D0%BA%D0%B0%D1%8F-%D0%BE%D1%85%D0%BE%D1%82%D0%B0/preload_8PhFI_obloghka_vedymak3.jpg" alt="The Witcher 3">
+                <div class="card-title">The Witcher 3</div>
+                <div class="card-price">1 699 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="The Witcher 3" data-price="999" data-img="https://gamespirit.org/image/%D0%B2%D0%B5%D0%B4%D1%8C%D0%BC%D0%B0%D0%BA-3--%D0%B4%D0%B8%D0%BA%D0%B0%D1%8F-%D0%BE%D1%85%D0%BE%D1%82%D0%B0/preload_8PhFI_obloghka_vedymak3.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="cyebr.html">
+                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/81a4e680815973.5cec6bcf6aa1a.jpg" alt="Cyberpunk 2077">
+                <div class="card-title">Cyberpunk 2077</div>
+                <div class="card-price">1 899 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Cyberpunk 2077" data-price="1999" data-img="https://mir-s3-cdn-cf.behance.net/project_modules/1400/81a4e680815973.5cec6bcf6aa1a.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="fallout.html">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCHdzGe5XNzRpT4O-c1t0KaMSu4NlDLcgiEh_KPZEEmisGYFkmC_xsudSKdwGi_J6Mq9Q&usqp=CAU" alt="Fallout 76">
+                <div class="card-title">Fallout 76</div>
+                <div class="card-price">1 799 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Fallout 76" data-price="1299" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCHdzGe5XNzRpT4O-c1t0KaMSu4NlDLcgiEh_KPZEEmisGYFkmC_xsudSKdwGi_J6Mq9Q&usqp=CAU">+</button>
+        </div>
+        <div class="card">
+            <a href="hitman.html">
+                <img src="https://cdn2.steamgriddb.com/logo/00ded208a2a2a932217ed8cc9c13c1d6.png" alt="HITMAN 3">
+                <div class="card-title">HITMAN 3</div>
+                <div class="card-price">699 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="HITMAN 3" data-price="1599" data-img="https://cdn2.steamgriddb.com/logo/00ded208a2a2a932217ed8cc9c13c1d6.png">+</button>
+        </div>
+        <div class="card">
+            <a href="farcry.html">
+                <img src="https://i.redd.it/8noebcqcxl861.jpg" alt="Far Cry 6">
+                <div class="card-title">Far Cry 6</div>
+                <div class="card-price">1 899 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Far Cry 6" data-price="1799" data-img="https://i.redd.it/8noebcqcxl861.jpg">+</button>
+        </div>
+        <div class="card">
+            <a href="rdr.html">
+                <img src="https://img.tapimg.net/market/images/c808a7ddb602a3d5b34a4056a0013946.png" alt="Red Dead Redemption 2">
+                <div class="card-title">Red Dead Redemption 2</div>
+                <div class="card-price">4 199 ₽</div>
+            </a>
+            <button class="add-to-cart" data-title="Red Dead Redemption 2" data-price="2499" data-img="https://img.tapimg.net/market/images/c808a7ddb602a3d5b34a4056a0013946.png">+</button>
+        </div>
+    </div>
+
+    <script>
+        // Переключение темы
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const overlay = document.querySelector('.overlay');
+        
+        // Проверяем сохраненную тему в localStorage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            body.classList.add('light-theme');
+            themeToggle.innerHTML = '<img src="https://www.svgrepo.com/show/309493/dark-theme.svg" alt="Переключить тему">';
+        } else {
+            themeToggle.innerHTML = '<img src="https://www.svgrepo.com/show/309493/light-theme.svg" alt="Переключить тему">';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            
+            // Сохраняем выбор темы в localStorage
+            if (body.classList.contains('light-theme')) {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<img src="https://www.svgrepo.com/show/309493/dark-theme.svg" alt="Переключить тему">';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<img src="https://www.svgrepo.com/show/309493/light-theme.svg" alt="Переключить тему">';
+            }
+        });
+
+        // Слайдер игр
+        const sliderContainer = document.getElementById('sliderContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const cards = document.querySelectorAll('.slider-card');
+        const cardWidth = 150 + 15; // ширина карточки + gap
+        let currentPosition = 0;
+        const visibleCards = 5;
+        const maxPosition = -(cards.length - visibleCards) * cardWidth;
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPosition > maxPosition) {
+                currentPosition -= cardWidth;
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPosition < 0) {
+                currentPosition += cardWidth;
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            }
+        });
+
+        // Автоматическая прокрутка
+        let autoSlideInterval = setInterval(() => {
+            if (currentPosition <= maxPosition) {
+                currentPosition = 0;
+            } else {
+                currentPosition -= cardWidth;
+            }
+            sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+        }, 3000);
+
+        // Остановка авто-прокрутки при наведении
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        sliderContainer.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(() => {
+                if (currentPosition <= maxPosition) {
+                    currentPosition = 0;
+                } else {
+                    currentPosition -= cardWidth;
+                }
+                sliderContainer.style.transform = `translateX(${currentPosition}px)`;
+            }, 3000);
+        });
+
+        // Логика корзины
+        const cartBtn = document.getElementById('cartBtn');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const notification = document.getElementById('notification');
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Обновление корзины
+        function updateCart() {
+            // Обновляем количество товаров
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Обновляем список товаров
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Корзина пуста</div>';
+                cartTotal.textContent = '0 ₽';
+                return;
+            }
+            
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">${item.price * item.quantity} ₽</div>
+                    </div>
+                    <button class="remove-item" data-index="${index}">&times;</button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = `${total} ₽`;
+            
+            // Сохраняем корзину в localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Открытие/закрытие корзины
+        cartBtn.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        // Добавление товара в корзину
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Предотвращаем переход по ссылке
+                e.stopPropagation(); // Предотвращаем всплытие события
+                
+                const title = button.getAttribute('data-title');
+                const price = parseInt(button.getAttribute('data-price'));
+                const img = button.getAttribute('data-img');
+                
+                // Проверяем, есть ли уже такой товар в корзине
+                const existingItem = cart.find(item => item.title === title);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        title,
+                        price,
+                        img,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Анимация добавления в корзину
+                button.textContent = '✓';
+                button.style.background = 'linear-gradient(135deg, #4cd137 0%, #44bd32 100%)';
+                
+                setTimeout(() => {
+                    button.textContent = '+';
+                    button.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)';
+                }, 1000);
+            });
+        });
+
+        // Удаление товара из корзины
+        cartItems.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-item')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                cart.splice(index, 1);
+                updateCart();
+            }
+        });
+
+        // Оформление заказа
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            // Показываем уведомление
+            notification.style.display = 'block';
+            
+            // Очищаем корзину
+            cart = [];
+            updateCart();
+            
+            // Закрываем корзину
+            cartModal.style.display = 'none';
+            
+            // Скрываем уведомление через 3 секунды
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        });
+
+        // Инициализация корзины при загрузке страницы
+        updateCart();
+    </script>
+</body>
+</html>

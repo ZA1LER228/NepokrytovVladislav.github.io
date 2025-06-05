@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NepoBank</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0px;
+            box-sizing: border-box;
+            padding: 0px;
+        }
+        .container{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .glav{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,1)), url('https://cdn.3dnews.ru/assets/external/illustrations/2024/11/22/1114446/1.jpg');
+            background-size: cover;
+            color: white;
+            padding-top: 80px;
+            justify-content: center;
+        }
+        .glav-content h3 {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .glav-content p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            width: 100%; /* Добавлено */
+            max-width: 800px;
+        }
+        .h3{
+            text-align: center;
+            justify-content: center;
+            font-size: 200px;
+            color: white;
+            animation: fadeIn 1s ease forwards;
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 1s ease forwards;
+
+        }
+        .logo {
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #a7a7a7;
+        }
+        header {
+            background: #000000;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+
+        }
+        p{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 1s ease forwards;
+        }
+        .about {
+            padding: 100px 0;
+            background: rgb(0, 0, 0);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text {
+            flex: 1;
+            color: #f9f9f9;
+            animation: fadeIn 1s ease forwards;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #f9f9f9;
+            animation: fadeIn 1s ease forwards;
+        }
+        .bez {
+            padding: 100px 0;
+            background: rgb(11, 11, 11);
+        }
+        .bez-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-direction: row-reverse;
+        }
+        
+        .bez-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .bez-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .bez-text {
+            flex: 1;
+            color: #f9f9f9;
+            animation: fadeIn 1s ease forwards;
+        }
+         @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Стили для кнопки */
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6b00;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            animation: fadeIn 2.5s ease forwards;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #ff8c00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">KEY Shop</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Подробнее</a></li>
+                    <li><a href="#bez">Безопасность</a></li>
+                    <li><a href="#contact">Почему мы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="glav" id="home">  
+            <div class="glav-content">
+            <h3 class="h3">KEY Shop</h3>
+            <p>KEY Shop – магазин, где вас ценят! 🚀</p>
+            <a href="key-shop.html" class="cta-button">Перейти в магазин</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Подробнее о нашем магазине</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="KEYShop.png" alt="Мое фото">
+                </div>
+                <div class="about-text">
+                    <h3>KEY Shop</h3>
+                    <p>Добро пожаловать в KEY Shop – ваш надежный источник лицензионных ключей для игр и программ в Steam!</p>
+                    <p>У нас вы найдете огромный выбор ключей по выгодным ценам, включая новинки, хиты и эксклюзивы. Все ключи 100% официальные, активируются мгновенно и работают без ограничений.</p>
+                    <br>
+                    <br>
+                    <p>Мы сотрудничаем напрямую с издателями, поэтому предлагаем лучшие цены и регулярные скидки. Покупка занимает всего пару минут – просто выберите товар, оплатите его и получите ключ на почту или в личном кабинете.</p>
+                    <br>
+                    <br>
+                    <p>В KEY Shop вас ждут безопасные платежи, круглосуточная поддержка и гарантия на все ключи. Покупайте с уверенностью и пополняйте свою коллекцию игр без переплат!</p>
+                    <p>У нас есть подарочные карты, DLC и софт – всё для комфортного гейминга.</p>
+                    <br>
+                    <br>
+                    <p>Заглядывайте в KEY Shop и открывайте мир Steam-развлечений по лучшим ценам! 🚀</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bez" id="bez">
+        <div class="container">
+            <h2 class="section-title">Безопасность сайта</h2>
+            <div class="bez-content">
+                <div class="bez-img">
+                    <img src="https://img.freepik.com/premium-vector/security-done-minimal-vector-line-icon-3d-button-isolated-black-background-premium-vectorxa_570929-1199.jpg">
+                </div>
+                <div class="bez-text">
+                    <h3>Безопасность нашего банка</h3>
+                    <p>В KEY Shop ваша безопасность – наш главный приоритет!</p>
+                    <p>Мы гарантируем полную защиту данных благодаря современному SSL-шифрованию, которое исключает перехват информации.</p>
+                    <p>Все платежи проходят через проверенные платежные системы, а не через сомнительные посредников.</p>
+                    <br>
+                    <p>Мы работаем только с официальными поставщиками, поэтому все ключи – лицензионные и без риска блокировки. Никакого grey market – только надежные источники!</p>
+                    <p>Каждый ключ проверяется перед продажей, чтобы вы получили рабочий продукт без проблем.</p>
+                    <br>
+                    <p>Наш сайт защищен от DDoS-атак и мошеннических действий, а двухфакторная аутентификация (2FA) дополнительно защищает ваш аккаунт.</p>
+                    <p>Мы не храним данные банковских карт, а все транзакции подтверждаются через безопасные платежные шлюзы.</p>
+                    <br>
+                    <br>
+                    <p>Покупайте в KEY Shop с уверенностью – здесь вас ждут гарантированная безопасность, моментальная доставка ключей и круглосуточная поддержка! 🔒🎮</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="contact">
+        <div class="container">
+            <h2 class="section-title">Почему именно мы?</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://zefirka.club/uploads/posts/2022-12/1671500060_5-zefirka-club-p-voprositelnii-znak-na-chernom-fone-5.jpg">
+                </div>
+                <div class="about-text">
+                    <h3>Почему именно мы?</h3>
+                    <p>🔑 Официальные ключи – Мы работаем только с проверенными поставщиками, поэтому все ключи 100% лицензионные и активируются без риска блокировки.</p>
+                    <p>💰 Лучшие цены – Благодаря прямым договорам с издателями мы предлагаем самые выгодные условия и регулярные скидки, которых нет у конкурентов.</p>
+                    <p>⚡ Мгновенная доставка – Получайте ключи автоматически сразу после оплаты – не нужно ждать подтверждения или писать в поддержку.</p>
+                    <p>🛡️ Полная безопасность – SSL-шифрование, защита от DDoS и гарантия работоспособности каждого ключа. Ваши данные и платежи под надежной защитой.</p>
+                    <p>🎮 Огромный ассортимент – У нас есть новинки, хиты, DLC, подарочные карты и софт – всё для вашего Steam-аккаунта в одном месте.</p>
+                    <p>📞 Поддержка 24/7 – Наша команда всегда на связи и готова помочь с любым вопросом в любое время суток.</p>
+                    <p>💎 Бонусы и акции – Регулярные розыгрыши, кэшбэк и специальные предложения для постоянных клиентов.</p>
+                    <br>
+                    <br>
+                    <p>Выбирайте KEY Shop – магазин, где вас ценят! 🚀</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

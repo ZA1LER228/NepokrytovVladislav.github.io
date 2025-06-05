@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    background-image: url(background-support.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+    font-family: Roboto, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px; /* Добавляем отступы */
+    position: relative; /* Устанавливаем позиционирование для body */
+}
+.top-left {
+    position: fixed; 
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: auto;
+    z-index: 1000;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2; /* z-index для overlay */
+}
+
+#number {
+    font-size: 48px;
+    color: #333;
+}
+h1 {
+    margin: 0; /* Убираем отступы */
+    font-size: 50px;
+    text-align: center; /* Центрируем заголовок */
+    position: relative; /* Устанавливаем позиционирование */
+    z-index: 3; /* Убедитесь, что z-index больше, чем у overlay */
+}
+h2 {
+    margin: 0; /* Убираем отступы */
+    font-size: 30px;
+    position: absolute; /* Устанавливаем абсолютное позиционирование */
+    top: 200px; /* Устанавливаем верхний отступ */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Центрируем элемент по горизонтали */
+    width: auto; /* Убираем ограничение ширины */
+    text-align: center; /* Центрируем текст */
+    line-height: 1.4; /* Увеличиваем межстрочный интервал для лучшей читаемости */
+    z-index: 4; /* Устанавливаем z-index больше, чем у overlay */
+}
+.top-support {
+    position: absolute; 
+    top: 350px;
+    left: 815px;
+    color: white;
+    width: 500px;
+    height: 105px;
+    z-index: 1000; /* Высокий z-index для кнопки */
+    border-radius: 50px;
+    font-size: 30px;
+}
